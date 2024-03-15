@@ -12,7 +12,7 @@ model Tutor {
   name       String
   email      String
   address    String
-  tutorDoc   Int      @unique
+  tutorDoc   String   @unique
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
   pets       Pet[]
@@ -27,7 +27,7 @@ model Pet {
   breed               String
   dateOfBirth         DateTime
   petTutorDocRelation Tutor    @relation(fields: [petTutorDoc], references: [tutorDoc])
-  petTutorDoc         Int
+  petTutorDoc         String
   created_at          DateTime @default(now())
   updated_at          DateTime @updatedAt
 
