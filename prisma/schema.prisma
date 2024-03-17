@@ -8,28 +8,30 @@ datasource db {
 }
 
 model Tutor {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   name       String
   email      String
   address    String
-  tutorDoc   String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  tutorDoc   String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
   pets       Pet[]
 
   @@map("tutors")
 }
 
 model Pet {
-  id                  Int      @id @default(autoincrement())
+  id                  Int       @id @default(autoincrement())
   name                String
   type                String
   breed               String
   dateOfBirth         Int
-  petTutorDocRelation Tutor    @relation(fields: [petTutorDoc], references: [tutorDoc])
-  petTutorDoc         String
-  created_at          DateTime @default(now())
-  updated_at          DateTime @updatedAt
+  petTutorDocRelation Tutor     @relation(fields: [petTutorDoc], references: [tutorDoc], onDelete: Cascade)
+  petTutorDoc         String    @unique
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+  deleted_at          DateTime?
 
   @@map("pets")
 }
