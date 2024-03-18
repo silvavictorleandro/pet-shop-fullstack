@@ -3,7 +3,7 @@ import { CreateTutorUseCase } from "./CreateTutorUseCase";
 
 export class CreateTutorController {
   async handle(req: Request, res: Response) {
-    const { name, email, address, tutorDoc } = req.body;
+    const { id, name, email, address, tutorDoc } = req.body;
 
     const createTutorUseCase = new CreateTutorUseCase();
 
