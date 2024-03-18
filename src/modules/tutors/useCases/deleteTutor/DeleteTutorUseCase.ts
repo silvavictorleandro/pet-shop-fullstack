@@ -10,8 +10,6 @@ export class DeleteTutorUseCase {
       },
     });
 
-    console.log(tutor);
-
     if (!tutor) {
       throw new AppError("Tutor not found!");
     }

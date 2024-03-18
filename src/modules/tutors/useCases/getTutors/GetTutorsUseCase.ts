@@ -9,6 +9,9 @@ export class GetTutorUseCase {
       },
       include: {
         pets: {
+          where: {
+            deleted_at: null,
+          },
           select: {
             name: true,
             type: true,

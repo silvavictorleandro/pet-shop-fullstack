@@ -17,9 +17,7 @@ export class CreateTutorUseCase {
     });
 
     if (tutorAlreadyExists) {
-      throw new AppError(
-        "O documento informado corresponde a um tutor já cadastrado"
-      );
+      throw new AppError("Email already exists!");
     }
 
     const tutor = await prisma.tutor.create({
