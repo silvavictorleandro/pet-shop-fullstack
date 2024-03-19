@@ -7,13 +7,13 @@ export class CreateTutorController {
 
     const createTutorUseCase = new CreateTutorUseCase();
 
-    const result = await createTutorUseCase.execute({
+    await createTutorUseCase.execute({
       name,
       email,
       address,
       tutorDoc,
     });
 
-    return res.status(201).json(result);
+    return res.status(201).json({ message: "Tutor created!" });
   }
 }

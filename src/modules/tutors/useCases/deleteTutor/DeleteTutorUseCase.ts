@@ -13,12 +13,9 @@ export class DeleteTutorUseCase {
     if (!tutor) {
       throw new AppError("Tutor not found!");
     }
-    const tutorToDelete = await prisma.tutor.update({
+    const tutorToDelete = await prisma.tutor.delete({
       where: {
         id: tutor.id,
-      },
-      data: {
-        deleted_at: new Date(),
       },
     });
 

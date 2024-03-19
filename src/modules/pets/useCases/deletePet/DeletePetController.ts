@@ -3,11 +3,12 @@ import { DeletePetUseCase } from "./DeletePetUseCase";
 
 export class DeletePetController {
   async handle(req: Request, res: Response) {
-    const { name, type, breed, dateOfBirth, petTutorDoc } = req.body;
+    const { id, name, type, breed, dateOfBirth, petTutorDoc } = req.body;
 
     const deletePetUseCase = new DeletePetUseCase();
 
     await deletePetUseCase.execute({
+      id,
       name,
       type,
       breed,

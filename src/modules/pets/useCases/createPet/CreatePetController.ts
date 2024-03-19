@@ -7,7 +7,7 @@ export class CreatePetController {
 
     const createPetUseCase = new CreatePetUseCase();
 
-    const result = await createPetUseCase.execute({
+    await createPetUseCase.execute({
       name,
       type,
       breed,
@@ -15,6 +15,6 @@ export class CreatePetController {
       petTutorDoc,
     });
 
-    return res.status(201).json(result);
+    return res.status(201).json({ message: "Pet created!" });
   }
 }

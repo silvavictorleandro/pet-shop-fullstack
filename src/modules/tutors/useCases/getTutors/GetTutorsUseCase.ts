@@ -4,14 +4,8 @@ import { prisma } from "../../../../prisma/client";
 export class GetTutorUseCase {
   async execute(): Promise<Tutor[]> {
     const tutors = await prisma.tutor.findMany({
-      where: {
-        deleted_at: null,
-      },
       include: {
         pets: {
-          where: {
-            deleted_at: null,
-          },
           select: {
             name: true,
             type: true,

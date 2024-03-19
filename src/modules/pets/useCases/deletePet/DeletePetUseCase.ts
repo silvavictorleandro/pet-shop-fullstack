@@ -3,22 +3,19 @@ import { prisma } from "../../../../prisma/client";
 import { CreatePetDTO } from "../../dtos/CreatePetDTO";
 
 export class DeletePetUseCase {
-  async execute({ petTutorDoc }: CreatePetDTO) {
+  async execute({ id }: CreatePetDTO) {
     const pet = await prisma.pet.findUnique({
       where: {
-        petTutorDoc: petTutorDoc,
+        id,
       },
     });
 
     if (!pet) {
       throw new AppError("Pet not found!");
     }
-    const petToDelete = await prisma.pet.update({
+    const petToDelete = await prisma.pet.delete({
       where: {
         id: pet.id,
-      },
-      data: {
-        deleted_at: new Date(),
       },
     });
 
