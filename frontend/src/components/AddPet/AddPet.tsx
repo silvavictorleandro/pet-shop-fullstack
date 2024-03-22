@@ -1,18 +1,17 @@
-import { useState } from "react";
 import * as S from "./styles";
 
 interface AddPetProps {
-  modal: boolean;
-  toggleModal: Function;
+  modalPet: boolean;
+  toggleModalPet: Function;
 }
 
-export const AddPet: React.FC<AddPetProps> = ({ modal, toggleModal }) => {
+export const AddPet: React.FC<AddPetProps> = ({ modalPet, toggleModalPet }) => {
   return (
-    <S.Fade modal={modal}>
-      <S.Modal modal={modal}>
+    <S.Fade modal={modalPet}>
+      <S.Modal modal={modalPet}>
         <S.ContainerHeader>
           <S.Title>Adicionar Pet</S.Title>
-          <S.ButtonClose onClick={() => toggleModal()}>Fechar</S.ButtonClose>
+          <S.ButtonClose onClick={() => toggleModalPet()}>Fechar</S.ButtonClose>
         </S.ContainerHeader>
         <S.LabelPetName>Nome Pet</S.LabelPetName>
         <S.InputPetName></S.InputPetName>

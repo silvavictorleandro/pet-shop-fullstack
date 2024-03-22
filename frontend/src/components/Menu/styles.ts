@@ -20,4 +20,6 @@ export const SearchInput = styled.input`
 
 export const SearchButton = styled.button``;
 
-export const ButtonAdd = styled.button``;
+export const ButtonAddTutor = styled.button``;
+
+export const ButtonAddPet = styled.button``;
