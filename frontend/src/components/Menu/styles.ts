@@ -14,7 +14,6 @@ export const ContainerSearch = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  border: none;
   height: 30px;
   padding: 0.3rem;
 `;
