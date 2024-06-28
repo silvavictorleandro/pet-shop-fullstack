@@ -8,12 +8,15 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: #f7f7f7;
+    background-color: #111827;
+    padding: 2.5rem 1rem;
     font-family: "Poppins", sans-serif;
+  }
 
-    @media (max-width: 550px) {
-      background-color: white;
-    }
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    /* background-color: blue; */
   }
 
   button {

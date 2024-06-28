@@ -20,18 +20,20 @@ export const Menu: React.FC = () => {
   return (
     <S.Menu>
       <S.ContainerSearch>
-        <FaSearch />
-        <S.SearchInput type="search"></S.SearchInput>
+        <S.SearchInput type="search" placeholder="Pesquisar pet..." />
         <S.SearchButton>Pesquisar</S.SearchButton>
       </S.ContainerSearch>
-      <S.ButtonAddTutor onClick={() => toggleModalTutor()}>
-        Cadastrar Tutor
-      </S.ButtonAddTutor>
-      <S.ButtonAddPet onClick={() => toggleModalPet()}>
-        Cadastrar Pet
-      </S.ButtonAddPet>
-      <AddTutor modalTutor={modalTutor} toggleModalTutor={toggleModalTutor} />
-      <AddPet modalPet={modalPet} toggleModalPet={toggleModalPet} />
+
+      <S.ContainerButtons>
+        <S.ButtonAdd onClick={() => toggleModalTutor()}>
+          Cadastrar Tutor
+        </S.ButtonAdd>
+        <S.ButtonAdd onClick={() => toggleModalPet()}>
+          Cadastrar Pet
+        </S.ButtonAdd>
+        <AddTutor modalTutor={modalTutor} toggleModalTutor={toggleModalTutor} />
+        <AddPet modalPet={modalPet} toggleModalPet={toggleModalPet} />
+      </S.ContainerButtons>
     </S.Menu>
   );
 };

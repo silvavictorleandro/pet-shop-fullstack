@@ -33,3 +33,15 @@ export const Button = styled.button`
   border: none;
   font-size: 1.5rem;
 `;
+
+export const ContainerEspecificInfos = styled.ul`
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  display: block;
+  height: 100px;
+  margin-top: 210px;
+  padding: 1.2rem;
+  position: absolute;
+  width: 250px;
+`;

@@ -5,12 +5,12 @@ import { GlobalStyles } from "./styles/GlobalStyles";
 
 function App() {
   return (
-    <>
+    <main>
       <Header />
       <Menu />
       <PetList />
       <GlobalStyles />
-    </>
+    </main>
   );
 }
 
