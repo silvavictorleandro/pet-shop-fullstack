@@ -3,7 +3,7 @@ import { DeletePetUseCase } from "./DeletePetUseCase";
 
 export class DeletePetController {
   async handle(req: Request, res: Response) {
-    const { id, name, type, breed, dateOfBirth, petTutorDoc } = req.body;
+    const { id, name, type, breed, dateOfBirth, tutorName } = req.body;
 
     const deletePetUseCase = new DeletePetUseCase();
 
@@ -11,9 +11,9 @@ export class DeletePetController {
       id,
       name,
       type,
+      tutorName,
       breed,
       dateOfBirth,
-      petTutorDoc,
     });
 
     return res.status(200).json({ message: "Pet deleted" });

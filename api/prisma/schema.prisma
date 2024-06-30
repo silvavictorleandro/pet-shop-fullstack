@@ -7,29 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Tutor {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  address   String
-  tutorDoc  String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  pets      Pet[]
-
-  @@map("tutors")
-}
-
 model Pet {
-  id                  Int      @id @default(autoincrement())
-  name                String
-  type                String
-  breed               String
-  dateOfBirth         Int
-  petTutorDocRelation Tutor    @relation(fields: [petTutorDoc], references: [tutorDoc], onDelete: Cascade)
-  petTutorDoc         String
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id          Int       @id @default(autoincrement())
+  name        String
+  type        String
+  tutorName   String
+  breed       String
+  dateOfBirth Int
+  createdAt   DateTime? @default(now())
+  updatedAt   DateTime? @default(now())
 
   @@map("pets")
 }

@@ -6,7 +6,11 @@ import { MdPets } from "react-icons/md";
 import * as S from "./styles";
 import { useState } from "react";
 
-export const PetCard: React.FC = () => {
+interface TypePetProps {
+  typePet: "FaCat" | "FaDog";
+}
+
+export const PetCard: React.FC<TypePetProps> = ({ typePet }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleButtonClick = () => {
@@ -18,9 +22,7 @@ export const PetCard: React.FC = () => {
       <S.Card>
         <S.FirstCard>
           <S.ContainerEspecificInfos>
-            <S.PetType>
-              <FaCat />
-            </S.PetType>
+            <S.PetType>{typePet === "FaCat" ? <FaCat /> : <FaDog />}</S.PetType>
 
             <S.ContainerInfos>
               <S.PetName>

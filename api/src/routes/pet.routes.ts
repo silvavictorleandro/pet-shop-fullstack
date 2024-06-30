@@ -9,8 +9,8 @@ const deletePetController = new DeletePetController();
 
 const petRoutes = Router();
 
-petRoutes.post("/", createPetController.handle);
-petRoutes.get("/", getPetController.handle);
-petRoutes.delete("/", deletePetController.handle);
+petRoutes.post("/post", createPetController.handle);
+petRoutes.get("/get", getPetController.handle);
+petRoutes.delete("/delete", deletePetController.handle);
 
 export { petRoutes };

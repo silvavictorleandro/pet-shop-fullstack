@@ -1,5 +1,3 @@
-import { FaSearch } from "react-icons/fa";
-
 import * as S from "./styles";
 import { AddPet } from "../AddPet/AddPet";
 import { useState } from "react";
