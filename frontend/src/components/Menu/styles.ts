@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 export const Menu = styled.section`
-  /* display: flex; */
   gap: 1rem;
-  /* justify-content: space-evenly; */
+  margin-top: 2rem;
   width: 100%;
 `;
 
@@ -20,7 +19,8 @@ export const SearchInput = styled.input`
   border-radius: 5px;
   height: 30px;
   padding: 0.3rem;
-  width: 60%;
+  width: 70%;
+  max-width: 700px;
 
   @media screen and (max-width: 768px) {
     width: 80%;
@@ -28,7 +28,7 @@ export const SearchInput = styled.input`
 `;
 
 export const SearchButton = styled.button`
-  background-color: #22c55e;
+  background-color: #60a5fa;
   border: none;
   border-radius: 5px;
   font-weight: bold;
