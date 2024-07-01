@@ -6,31 +6,47 @@ import { MdPets } from "react-icons/md";
 import * as S from "./styles";
 import { useState } from "react";
 
-interface TypePetProps {
-  typePet: "FaCat" | "FaDog";
+interface Pet {
+  id: number;
+  name: string;
+  type: "Cachorro" | "Gato";
+  tutorName: string;
+  breed: string;
+  dateOfBirth: number;
 }
 
-export const PetCard: React.FC<TypePetProps> = ({ typePet }) => {
+interface TypePetProps {
+  pets: Pet;
+}
+
+export const PetCard: React.FC<TypePetProps> = ({ pets }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleButtonClick = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const millisecondsInYear = 1000 * 60 * 60 * 24 * 365;
+  const date = new Date(pets.dateOfBirth, 0, 1);
+  const ageInMilliseconds = Date.now() - date.getTime();
+  const agePet = Math.floor(ageInMilliseconds / millisecondsInYear);
+
   return (
     <>
       <S.Card>
         <S.FirstCard>
           <S.ContainerEspecificInfos>
-            <S.PetType>{typePet === "FaCat" ? <FaCat /> : <FaDog />}</S.PetType>
+            <S.PetType>
+              {pets.type === "Gato" ? <FaCat /> : <FaDog />}
+            </S.PetType>
 
             <S.ContainerInfos>
               <S.PetName>
-                <MdPets /> Jimmy
+                <MdPets /> {pets.name}
               </S.PetName>
 
               <S.TutorName>
-                <FaUser /> Silva
+                <FaUser /> {pets.tutorName}
               </S.TutorName>
             </S.ContainerInfos>
 
@@ -43,10 +59,10 @@ export const PetCard: React.FC<TypePetProps> = ({ typePet }) => {
         </S.FirstCard>
         <S.SecondCard isExpanded={isExpanded}>
           <S.Breed>
-            <FaDna style={{ fontSize: "13px" }} /> Raça: Siamês
+            <FaDna style={{ fontSize: "13px" }} /> Raça: {pets.breed}
           </S.Breed>
           <S.BirthDay>
-            <FaRegCalendarAlt style={{ fontSize: "13px" }} /> Idade: 3 anos
+            <FaRegCalendarAlt style={{ fontSize: "13px" }} /> Idade: {agePet}
           </S.BirthDay>
           <S.EditButton>
             <RiEditBoxLine style={{ fontSize: "18px" }} />
