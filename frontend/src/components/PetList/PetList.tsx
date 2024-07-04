@@ -12,13 +12,14 @@ export const PetList: React.FC<Pets> = ({ pets, setPets }) => {
   async function getPets() {
     const response = await api.get("/");
     setPets(response.data);
+    console.log(response.data);
   }
 
   return (
     <S.Main>
       <S.Container>
         {pets.map((pet: Pet) => (
-          <PetCard key={pet.id} pets={pet} />
+          <PetCard key={pet.id} pets={pets} pet={pet} setPets={setPets} />
         ))}
       </S.Container>
     </S.Main>

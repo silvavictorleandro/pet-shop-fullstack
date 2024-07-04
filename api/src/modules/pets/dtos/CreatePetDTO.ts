@@ -1,8 +1,8 @@
 export interface CreatePetDTO {
-  id?: number;
+  id: string;
   name: string;
   type: string;
   tutorName: string;
   breed: string;
-  dateOfBirth: number;
+  dateOfBirth: string;
 }

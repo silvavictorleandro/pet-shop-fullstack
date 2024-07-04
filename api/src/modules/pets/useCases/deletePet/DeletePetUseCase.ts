@@ -4,10 +4,8 @@ import { CreatePetDTO } from "../../dtos/CreatePetDTO";
 
 export class DeletePetUseCase {
   async execute({ id }: CreatePetDTO) {
-    const pet = await prisma.pet.findUnique({
-      where: {
-        id,
-      },
+    const pet = await prisma.pet.findFirst({
+      where: { id: id },
     });
 
     if (!pet) {

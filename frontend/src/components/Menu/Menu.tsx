@@ -1,7 +1,7 @@
 import * as S from "./styles";
 import { AddPet } from "../AddPet/AddPet";
 import { useState } from "react";
-import { Pet, Pets } from "../../App";
+import { Pets } from "../../App";
 
 export const Menu: React.FC<Pets> = ({ pets, setPets }) => {
   const [modalPet, setModalPet] = useState(false);

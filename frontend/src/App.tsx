@@ -5,7 +5,7 @@ import { PetList } from "./components/PetList/PetList";
 import { GlobalStyles } from "./styles/GlobalStyles";
 
 export interface Pet {
-  id: number;
+  id: string;
   name: string;
   type: "Cachorro" | "Gato";
   tutorName: string;
