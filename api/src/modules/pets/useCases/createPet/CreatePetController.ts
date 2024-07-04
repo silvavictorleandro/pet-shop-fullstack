@@ -3,11 +3,12 @@ import { CreatePetUseCase } from "./CreatePetUseCase";
 
 export class CreatePetController {
   async handle(req: Request, res: Response) {
-    const { name, type, breed, dateOfBirth, tutorName } = req.body;
+    const { id, name, type, breed, dateOfBirth, tutorName } = req.body;
 
     const createPetUseCase = new CreatePetUseCase();
 
     await createPetUseCase.execute({
+      id,
       name,
       type,
       tutorName,

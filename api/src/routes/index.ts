@@ -3,6 +3,6 @@ import { petRoutes } from "./pet.routes";
 
 const routes = Router();
 
-routes.use("/pets", petRoutes);
+routes.use("/", petRoutes);
 
 export { routes };

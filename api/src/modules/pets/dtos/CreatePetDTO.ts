@@ -1,5 +1,5 @@
 export interface CreatePetDTO {
-  id: number;
+  id?: number;
   name: string;
   type: string;
   tutorName: string;

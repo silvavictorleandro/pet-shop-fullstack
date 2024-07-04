@@ -1,12 +1,54 @@
 import { MdClose } from "react-icons/md";
 import * as S from "./styles";
+import { FormEvent, useEffect, useRef } from "react";
+import { api } from "../../service/api";
+import { Pet } from "../../App";
+import { error } from "console";
 
 interface AddPetProps {
   modalPet: boolean;
   toggleModalPet: Function;
+  pets: Pet[];
+  setPets: any;
 }
 
-export const AddPet: React.FC<AddPetProps> = ({ modalPet, toggleModalPet }) => {
+export const AddPet: React.FC<AddPetProps> = ({
+  modalPet,
+  toggleModalPet,
+  pets,
+  setPets,
+}) => {
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const typeRef = useRef<HTMLInputElement | null>(null);
+  const breedRef = useRef<HTMLInputElement | null>(null);
+  const ageRef = useRef<HTMLInputElement | null>(null);
+  const tutorNameRef = useRef<HTMLInputElement | null>(null);
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    if (
+      !nameRef.current?.value ||
+      !typeRef.current?.value ||
+      !breedRef.current?.value ||
+      !ageRef.current?.value ||
+      !tutorNameRef.current?.value
+    ) {
+      alert("Preencha todos os campos!");
+      return;
+    }
+
+    const response = await api.post("/post", {
+      name: nameRef.current?.value,
+      type: typeRef.current?.value,
+      breed: breedRef.current?.value,
+      dateOfBirth: ageRef.current?.value,
+      tutorName: tutorNameRef.current?.value,
+    });
+
+    setPets((allPets: any) => [...allPets, response.data]);
+  }
+
   return (
     <S.Fade modal={modalPet}>
       <S.Modal modal={modalPet}>
@@ -17,23 +59,29 @@ export const AddPet: React.FC<AddPetProps> = ({ modalPet, toggleModalPet }) => {
           </S.ButtonClose>
         </S.ContainerHeader>
 
-        <S.Label>Nome Pet</S.Label>
-        <S.Input></S.Input>
-        <S.Label>Espécie do Pet</S.Label>
-        <S.InputOption>
-          <option selected disabled>
-            Selecione o seu pet
-          </option>
-          <option>Gato</option>
-          <option>Cachorro</option>
-        </S.InputOption>
-        <S.Label>Raça</S.Label>
-        <S.Input></S.Input>
-        <S.Label>Data de Nascimento do Pet</S.Label>
-        <S.Input type="date"></S.Input>
-        <S.Label>CPF do Tutor</S.Label>
-        <S.Input></S.Input>
-        <S.ButtonAddPet>Cadastrar Pet</S.ButtonAddPet>
+        <S.Form onSubmit={handleSubmit}>
+          <S.Label>Nome Pet</S.Label>
+          <S.Input ref={nameRef}></S.Input>
+          <S.Label>Espécie do Pet</S.Label>
+          <S.Input ref={typeRef} placeholder="Gato ou Cachorro"></S.Input>
+          {/* <S.InputOption ref={typeRef}>
+            <option ref={typeRef} selected disabled>
+              Selecione o seu pet
+            </option>
+            <option ref={typeRef}>Gato</option>
+            <option ref={typeRef}>Cachorro</option>
+          </S.InputOption> */}
+          <S.Label>Raça</S.Label>
+          <S.Input ref={breedRef}></S.Input>
+          <S.Label>Data de Nascimento do Pet</S.Label>
+          <S.Input type="date" ref={ageRef}></S.Input>
+          <S.Label>Nome Tutor</S.Label>
+          <S.Input ref={tutorNameRef}></S.Input>
+          <S.ButtonAddPet
+            type="submit"
+            value={"Adicionar Pet"}
+          ></S.ButtonAddPet>
+        </S.Form>
       </S.Modal>
     </S.Fade>
   );

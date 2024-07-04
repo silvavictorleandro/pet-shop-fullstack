@@ -20,8 +20,6 @@ export const Fade = styled.div<ModalProps>`
 export const Modal = styled.div<ModalProps>`
   background-color: #f8f8f8;
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
   position: fixed;
   left: 50%;
   max-width: 90%;
@@ -53,6 +51,11 @@ export const ButtonClose = styled.button`
   padding: 0.5rem 0.5rem;
 `;
 
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Label = styled.label`
   margin-top: 0.5rem;
 `;
@@ -75,7 +78,7 @@ export const InputOption = styled.select`
   width: 100%;
 `;
 
-export const ButtonAddPet = styled.button`
+export const ButtonAddPet = styled.input`
   background-color: #22c55e;
   border: none;
   border-radius: 5px;

@@ -9,10 +9,10 @@ import { useState } from "react";
 interface Pet {
   id: number;
   name: string;
-  type: "Cachorro" | "Gato";
+  type: string;
   tutorName: string;
   breed: string;
-  dateOfBirth: number;
+  dateOfBirth: string;
 }
 
 interface TypePetProps {
@@ -27,9 +27,11 @@ export const PetCard: React.FC<TypePetProps> = ({ pets }) => {
   };
 
   const millisecondsInYear = 1000 * 60 * 60 * 24 * 365;
-  const date = new Date(pets.dateOfBirth, 0, 1);
+  const convertDate = Number(pets.dateOfBirth);
+  const date = new Date(convertDate, 0, 1);
   const ageInMilliseconds = Date.now() - date.getTime();
-  const agePet = Math.floor(ageInMilliseconds / millisecondsInYear);
+  const agePetNumber = Math.floor(ageInMilliseconds / millisecondsInYear);
+  const agePet = agePetNumber.toString();
 
   return (
     <>
