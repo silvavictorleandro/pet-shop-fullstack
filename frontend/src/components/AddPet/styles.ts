@@ -78,7 +78,7 @@ export const InputOption = styled.select`
   width: 100%;
 `;
 
-export const ButtonAddPet = styled.input`
+export const ButtonAddPet = styled.button`
   background-color: #22c55e;
   border: none;
   border-radius: 5px;

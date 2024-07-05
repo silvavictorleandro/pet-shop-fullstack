@@ -1,9 +1,8 @@
 import { MdClose } from "react-icons/md";
 import * as S from "./styles";
-import { FormEvent, useEffect, useRef } from "react";
+import { FormEvent, useRef } from "react";
 import { api } from "../../service/api";
 import { Pet } from "../../App";
-import { error } from "console";
 
 interface AddPetProps {
   modalPet: boolean;
@@ -40,13 +39,21 @@ export const AddPet: React.FC<AddPetProps> = ({
 
     const response = await api.post("/post", {
       name: nameRef.current?.value,
-      type: typeRef.current?.value,
+      type: typeRef.current?.value.toLowerCase(),
       breed: breedRef.current?.value,
       dateOfBirth: ageRef.current?.value,
       tutorName: tutorNameRef.current?.value,
     });
 
+    console.log(response);
+
     setPets((allPets: any) => [...allPets, response.data]);
+
+    nameRef.current.value = "";
+    typeRef.current.value = "";
+    breedRef.current.value = "";
+    ageRef.current.value = "";
+    tutorNameRef.current.value = "";
   }
 
   return (
@@ -64,23 +71,13 @@ export const AddPet: React.FC<AddPetProps> = ({
           <S.Input ref={nameRef}></S.Input>
           <S.Label>Espécie do Pet</S.Label>
           <S.Input ref={typeRef} placeholder="Gato ou Cachorro"></S.Input>
-          {/* <S.InputOption ref={typeRef}>
-            <option ref={typeRef} selected disabled>
-              Selecione o seu pet
-            </option>
-            <option ref={typeRef}>Gato</option>
-            <option ref={typeRef}>Cachorro</option>
-          </S.InputOption> */}
           <S.Label>Raça</S.Label>
           <S.Input ref={breedRef}></S.Input>
           <S.Label>Data de Nascimento do Pet</S.Label>
           <S.Input type="date" ref={ageRef}></S.Input>
           <S.Label>Nome Tutor</S.Label>
           <S.Input ref={tutorNameRef}></S.Input>
-          <S.ButtonAddPet
-            type="submit"
-            value={"Adicionar Pet"}
-          ></S.ButtonAddPet>
+          <S.ButtonAddPet>Adicionar Pet</S.ButtonAddPet>
         </S.Form>
       </S.Modal>
     </S.Fade>
