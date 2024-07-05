@@ -29,12 +29,9 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const millisecondsInYear = 1000 * 60 * 60 * 24 * 365;
-  const convertDate = Number(pet.dateOfBirth);
-  const date = new Date(convertDate, 0, 1);
-  const ageInMilliseconds = Date.now() - date.getTime();
-  const agePetNumber = Math.floor(ageInMilliseconds / millisecondsInYear);
-  const agePet = agePetNumber.toString();
+  const birthDate = new Date(pet.dateOfBirth);
+  const today = new Date();
+  const ageInYears = today.getFullYear() - birthDate.getFullYear();
 
   async function handleDelete(id: string) {
     try {
@@ -80,7 +77,8 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
             <FaDna style={{ fontSize: "13px" }} /> Raça: {pet.breed}
           </S.Breed>
           <S.BirthDay>
-            <FaRegCalendarAlt style={{ fontSize: "13px" }} /> Idade: {agePet}
+            <FaRegCalendarAlt style={{ fontSize: "13px" }} /> Idade:{" "}
+            {ageInYears}
           </S.BirthDay>
           <S.EditButton>
             <RiEditBoxLine style={{ fontSize: "18px" }} />
