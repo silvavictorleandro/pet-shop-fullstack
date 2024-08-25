@@ -36,11 +36,8 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
   } else {
     birthDate = new Date();
   }
-  console.log(birthDate);
   const today = new Date();
-  console.log(today);
   const ageInYears = differenceInYears(today, birthDate);
-  console.log(ageInYears);
 
   async function handleDelete(id: string) {
     try {

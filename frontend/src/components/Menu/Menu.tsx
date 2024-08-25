@@ -3,7 +3,7 @@ import { AddPet } from "../AddPet/AddPet";
 import { useState } from "react";
 import { Pets } from "../../App";
 
-export const Menu: React.FC<Pets> = ({ pets, setPets }) => {
+export const Menu: React.FC<Pets> = ({ pets, setPets, getPets }) => {
   const [modalPet, setModalPet] = useState(false);
 
   const toggleModalPet = () => {
@@ -26,6 +26,7 @@ export const Menu: React.FC<Pets> = ({ pets, setPets }) => {
           toggleModalPet={toggleModalPet}
           pets={pets}
           setPets={setPets}
+          getPets={getPets}
         />
       </S.ContainerButtons>
     </S.Menu>

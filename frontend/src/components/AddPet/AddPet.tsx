@@ -9,12 +9,14 @@ interface AddPetProps {
   toggleModalPet: Function;
   pets: Pet[];
   setPets: any;
+  getPets: any;
 }
 
 export const AddPet: React.FC<AddPetProps> = ({
   modalPet,
   toggleModalPet,
   setPets,
+  getPets,
 }) => {
   const nameRef = useRef<HTMLInputElement | null>(null);
   const typeRef = useRef<HTMLInputElement | null>(null);
@@ -51,6 +53,9 @@ export const AddPet: React.FC<AddPetProps> = ({
     breedRef.current.value = "";
     ageRef.current.value = "";
     tutorNameRef.current.value = "";
+
+    toggleModalPet();
+    getPets();
   }
 
   return (
