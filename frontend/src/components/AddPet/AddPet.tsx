@@ -3,6 +3,7 @@ import * as S from "./styles";
 import { FormEvent, useRef } from "react";
 import { api } from "../../service/api";
 import { Pet } from "../../App";
+import { toast } from "react-toastify";
 
 interface AddPetProps {
   modalPet: boolean;
@@ -47,6 +48,8 @@ export const AddPet: React.FC<AddPetProps> = ({
     });
 
     setPets((allPets: any) => [...allPets, response.data]);
+
+    toast.success("Pet cadastrado com sucesso!");
 
     nameRef.current.value = "";
     typeRef.current.value = "";
