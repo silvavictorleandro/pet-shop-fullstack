@@ -21,9 +21,15 @@ interface TypePetProps {
   pets: Pet[];
   pet: Pet;
   setPets: any;
+  handleDelete: any;
 }
 
-export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
+export const PetCard: React.FC<TypePetProps> = ({
+  pets,
+  pet,
+  setPets,
+  handleDelete,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleButtonClick = () => {
@@ -38,21 +44,6 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
   }
   const today = new Date();
   const ageInYears = differenceInYears(today, birthDate);
-
-  async function handleDelete(id: string) {
-    try {
-      await api.delete("/delete", {
-        params: {
-          id: id,
-        },
-      });
-
-      const allPets = pets.filter((pet) => pet.id !== id);
-      setPets(allPets);
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
     <>
