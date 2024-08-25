@@ -6,6 +6,7 @@ import { MdPets } from "react-icons/md";
 import * as S from "./styles";
 import { useState } from "react";
 import { api } from "../../service/api";
+import { parseISO, differenceInYears } from "date-fns";
 
 interface Pet {
   id: string;
@@ -29,9 +30,17 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const birthDate = new Date(pet.dateOfBirth);
+  let birthDate;
+  if (pet.dateOfBirth) {
+    birthDate = parseISO(pet.dateOfBirth);
+  } else {
+    birthDate = new Date();
+  }
+  console.log(birthDate);
   const today = new Date();
-  const ageInYears = today.getFullYear() - birthDate.getFullYear();
+  console.log(today);
+  const ageInYears = differenceInYears(today, birthDate);
+  console.log(ageInYears);
 
   async function handleDelete(id: string) {
     try {
