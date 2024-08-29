@@ -2,7 +2,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FaUser, FaCat, FaDog, FaRegCalendarAlt, FaDna } from "react-icons/fa";
 import { RiDeleteBin6Line, RiEditBoxLine } from "react-icons/ri";
 import { MdPets } from "react-icons/md";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import * as S from "./styles";
 import { useState } from "react";
@@ -48,11 +48,7 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
         },
       });
 
-      console.log(id);
-      console.log(api);
-
       const allPets = pets.filter((pet) => pet.id !== id);
-      console.log(allPets);
       setPets(allPets);
       toast.error("Pet deletado com sucesso!");
     } catch (err) {

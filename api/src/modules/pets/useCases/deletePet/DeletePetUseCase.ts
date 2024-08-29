@@ -1,9 +1,9 @@
 import { AppError } from "../../../../errors/AppError";
 import { prisma } from "../../../../prisma/client";
-import { CreatePetDTO } from "../../dtos/CreatePetDTO";
+import { DeletePetDTO } from "../../dtos/DeletePetDTO";
 
 export class DeletePetUseCase {
-  async execute({ id }: CreatePetDTO) {
+  async execute({ id }: DeletePetDTO) {
     const pet = await prisma.pet.findFirst({
       where: { id: id },
     });
