@@ -2,6 +2,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { FaUser, FaCat, FaDog, FaRegCalendarAlt, FaDna } from "react-icons/fa";
 import { RiDeleteBin6Line, RiEditBoxLine } from "react-icons/ri";
 import { MdPets } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
 
 import * as S from "./styles";
 import { useState } from "react";
@@ -21,15 +22,9 @@ interface TypePetProps {
   pets: Pet[];
   pet: Pet;
   setPets: any;
-  handleDelete: any;
 }
 
-export const PetCard: React.FC<TypePetProps> = ({
-  pets,
-  pet,
-  setPets,
-  handleDelete,
-}) => {
+export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleButtonClick = () => {
@@ -45,9 +40,29 @@ export const PetCard: React.FC<TypePetProps> = ({
   const today = new Date();
   const ageInYears = differenceInYears(today, birthDate);
 
+  async function handleDelete(id: string) {
+    try {
+      await api.delete("/delete", {
+        params: {
+          id: id,
+        },
+      });
+
+      console.log(id);
+      console.log(api);
+
+      const allPets = pets.filter((pet) => pet.id !== id);
+      console.log(allPets);
+      setPets(allPets);
+      toast.error("Pet deletado com sucesso!");
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
-      <S.Card>
+      <S.Card key={pet.id}>
         <S.FirstCard>
           <S.ContainerEspecificInfos>
             <S.PetType>{pet.type === "gato" ? <FaCat /> : <FaDog />}</S.PetType>
