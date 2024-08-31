@@ -6,15 +6,7 @@ import { api } from "../src/service/api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalStyles } from "./styles/GlobalStyles";
-
-export interface Pet {
-  id: string;
-  name: string;
-  type: "Cachorro" | "Gato";
-  tutorName: string;
-  breed: string;
-  dateOfBirth: string;
-}
+import { Pet } from "./interfaces/interfaces";
 
 export interface Pets {
   pets: Pet[];

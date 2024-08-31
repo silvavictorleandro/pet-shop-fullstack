@@ -8,27 +8,36 @@ import * as S from "./styles";
 import { useState } from "react";
 import { api } from "../../service/api";
 import { parseISO, differenceInYears } from "date-fns";
-
-interface Pet {
-  id: string;
-  name: string;
-  type: string;
-  tutorName: string;
-  breed: string;
-  dateOfBirth: string;
-}
+import { AddPet } from "../AddPet/AddPet";
+import { Pet } from "../../interfaces/interfaces";
 
 interface TypePetProps {
   pets: Pet[];
   pet: Pet;
   setPets: any;
+  getPets: any;
 }
 
-export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
+export const PetCard: React.FC<TypePetProps> = ({
+  pets,
+  pet,
+  setPets,
+  getPets,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [modalPet, setModalPet] = useState(false);
+  const [modalEditPet, setModalEditPet] = useState(false);
 
   const handleButtonClick = () => {
     setIsExpanded(!isExpanded);
+  };
+
+  const toggleModalPet = () => {
+    setModalPet(!modalPet);
+  };
+
+  const toggleModalEditPet = () => {
+    setModalEditPet(!modalEditPet);
   };
 
   let birthDate;
@@ -61,7 +70,7 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
       <S.Card key={pet.id}>
         <S.FirstCard>
           <S.ContainerEspecificInfos>
-            <S.PetType>{pet.type === "gato" ? <FaCat /> : <FaDog />}</S.PetType>
+            <S.PetType>{pet.type === "Gato" ? <FaCat /> : <FaDog />}</S.PetType>
 
             <S.ContainerInfos>
               <S.PetName>
@@ -88,7 +97,7 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
             <FaRegCalendarAlt style={{ fontSize: "13px" }} /> Idade:{" "}
             {ageInYears}
           </S.BirthDay>
-          <S.EditButton>
+          <S.EditButton onClick={toggleModalPet}>
             <RiEditBoxLine style={{ fontSize: "18px" }} />
             Editar
           </S.EditButton>
@@ -96,6 +105,14 @@ export const PetCard: React.FC<TypePetProps> = ({ pets, pet, setPets }) => {
             <RiDeleteBin6Line style={{ fontSize: "18px" }} />
             Remover
           </S.RemoveButton>
+          <AddPet
+            modalPet={modalPet}
+            modalEditPet={modalEditPet}
+            toggleModalPet={toggleModalPet}
+            pets={pets}
+            setPets={setPets}
+            getPets={getPets}
+          />
         </S.SecondCard>
       </S.Card>
     </>

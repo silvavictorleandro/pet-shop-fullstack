@@ -2,11 +2,12 @@ import { MdClose } from "react-icons/md";
 import * as S from "./styles";
 import { FormEvent, useRef } from "react";
 import { api } from "../../service/api";
-import { Pet } from "../../App";
+import { Pet } from "../../interfaces/interfaces";
 import { toast } from "react-toastify";
 
 interface AddPetProps {
   modalPet: boolean;
+  modalEditPet?: boolean;
   toggleModalPet: Function;
   pets: Pet[];
   setPets: any;
@@ -15,6 +16,7 @@ interface AddPetProps {
 
 export const AddPet: React.FC<AddPetProps> = ({
   modalPet,
+  modalEditPet,
   toggleModalPet,
   setPets,
   getPets,
