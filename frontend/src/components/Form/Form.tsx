@@ -5,7 +5,7 @@ import { api } from "../../service/api";
 import { Pet } from "../../interfaces/interfaces";
 import { toast } from "react-toastify";
 
-interface AddPetProps {
+interface FormProps {
   modalPet: boolean;
   modalEditPet?: boolean;
   toggleModalPet: Function;
@@ -16,11 +16,12 @@ interface AddPetProps {
   currentPet?: Pet | null;
 }
 
-export const AddPet: React.FC<AddPetProps> = ({
+export const Form: React.FC<FormProps> = ({
   modalPet,
   modalEditPet,
   toggleModalPet,
   toggleModalEditPet,
+  pets,
   setPets,
   getPets,
   currentPet,
@@ -56,24 +57,63 @@ export const AddPet: React.FC<AddPetProps> = ({
       return;
     }
 
-    const response = await api.post("/post", {
-      name: nameRef.current?.value,
-      type: typeRef.current?.value.toLowerCase(),
-      breed: breedRef.current?.value,
-      dateOfBirth: ageRef.current?.value,
-      tutorName: tutorNameRef.current?.value,
-    });
+    if (modalEditPet && currentPet) {
+      try {
+        const response = await api.patch(`/patch?id=${currentPet.id}`, {
+          id: currentPet.id,
+          name: nameRef.current?.value,
+          type: typeRef.current?.value.toLowerCase(),
+          breed: breedRef.current?.value,
+          dateOfBirth: ageRef.current?.value,
+          tutorName: tutorNameRef.current?.value,
+        });
 
-    setPets((allPets: any) => [...allPets, response.data]);
+        const allPets = pets.map((pet: Pet) => {
+          if (pet.id === currentPet.id) {
+            return response.data;
+          }
+          return pet;
+        });
 
-    toast.success("Pet cadastrado com sucesso!");
+        setPets(allPets);
 
-    nameRef.current.value = "";
-    typeRef.current.value = "";
-    breedRef.current.value = "";
-    ageRef.current.value = "";
-    tutorNameRef.current.value = "";
+        toast.success("Pet atualizado com sucesso!");
 
+        nameRef.current.value = "";
+        typeRef.current.value = "";
+        breedRef.current.value = "";
+        ageRef.current.value = "";
+        tutorNameRef.current.value = "";
+
+        modalEditPet && toggleModalEditPet();
+      } catch (err) {
+        console.log(err);
+        toast.error("Erro ao atualizar pet!");
+      }
+    } else {
+      try {
+        const response = await api.post("/post", {
+          name: nameRef.current?.value,
+          type: typeRef.current?.value.toLowerCase(),
+          breed: breedRef.current?.value,
+          dateOfBirth: ageRef.current?.value,
+          tutorName: tutorNameRef.current?.value,
+        });
+
+        setPets((allPets: any) => [...allPets, response.data]);
+
+        toast.success("Pet cadastrado com sucesso!");
+
+        nameRef.current.value = "";
+        typeRef.current.value = "";
+        breedRef.current.value = "";
+        ageRef.current.value = "";
+        tutorNameRef.current.value = "";
+      } catch (err) {
+        console.log(err);
+        toast.error("Erro ao cadastrar pet!");
+      }
+    }
     modalPet && toggleModalPet();
     modalEditPet && toggleModalEditPet();
 

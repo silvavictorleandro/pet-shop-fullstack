@@ -8,7 +8,7 @@ import * as S from "./styles";
 import { useState } from "react";
 import { api } from "../../service/api";
 import { parseISO, differenceInYears } from "date-fns";
-import { AddPet } from "../AddPet/AddPet";
+import { Form } from "../Form/Form";
 import { Pet } from "../../interfaces/interfaces";
 
 interface TypePetProps {
@@ -105,7 +105,7 @@ export const PetCard: React.FC<TypePetProps> = ({
             <RiDeleteBin6Line style={{ fontSize: "18px" }} />
             Remover
           </S.RemoveButton>
-          <AddPet
+          <Form
             modalPet={modalPet}
             modalEditPet={modalEditPet}
             toggleModalPet={toggleModalPet}

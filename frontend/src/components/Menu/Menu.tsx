@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import { AddPet } from "../AddPet/AddPet";
+import { Form } from "../Form/Form";
 import { useState } from "react";
 import { Pets } from "../../App";
 
@@ -25,7 +25,7 @@ export const Menu: React.FC<Pets> = ({ pets, setPets, getPets }) => {
         <S.ButtonAdd onClick={() => toggleModalPet()}>
           Cadastrar Pet
         </S.ButtonAdd>
-        <AddPet
+        <Form
           modalPet={modalPet}
           toggleModalPet={toggleModalPet}
           toggleModalEditPet={toggleModalEditPet}
