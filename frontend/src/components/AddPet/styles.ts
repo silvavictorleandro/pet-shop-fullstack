@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface ModalProps {
   modal: boolean;
+  modalEditPet?: boolean;
 }
 
 export const Fade = styled.div<ModalProps>`
@@ -12,8 +13,9 @@ export const Fade = styled.div<ModalProps>`
   height: 100%;
   width: 100%;
   z-index: 5;
-  opacity: ${(props) => (props.modal ? "1" : "0")};
-  pointer-events: ${(props) => (props.modal ? "all" : "none")};
+  opacity: ${(props) => (props.modal || props.modalEditPet ? "1" : "0")};
+  pointer-events: ${(props) =>
+    props.modal || props.modalEditPet ? "all" : "none"};
   transition: 0.5s;
 `;
 
@@ -24,12 +26,13 @@ export const Modal = styled.div<ModalProps>`
   left: 50%;
   max-width: 90%;
   padding: 2rem;
-  top: ${(props) => (props.modal ? "50%" : "0")};
+  top: ${(props) => (props.modal || props.modalEditPet ? "50%" : "0")};
   transform: translate(-50%, -50%);
   width: 400px;
   z-index: 10;
-  opacity: ${(props) => (props.modal ? "1" : "0")};
-  pointer-events: ${(props) => (props.modal ? "all" : "none")};
+  opacity: ${(props) => (props.modal || props.modalEditPet ? "1" : "0")};
+  pointer-events: ${(props) =>
+    props.modal || props.modalEditPet ? "all" : "none"};
   transition: 0.5s;
 `;
 

@@ -10,6 +10,10 @@ export const Menu: React.FC<Pets> = ({ pets, setPets, getPets }) => {
     setModalPet(!modalPet);
   };
 
+  const toggleModalEditPet = () => {
+    setModalPet(!modalPet);
+  };
+
   return (
     <S.Menu>
       <S.ContainerSearch>
@@ -24,6 +28,7 @@ export const Menu: React.FC<Pets> = ({ pets, setPets, getPets }) => {
         <AddPet
           modalPet={modalPet}
           toggleModalPet={toggleModalPet}
+          toggleModalEditPet={toggleModalEditPet}
           pets={pets}
           setPets={setPets}
           getPets={getPets}

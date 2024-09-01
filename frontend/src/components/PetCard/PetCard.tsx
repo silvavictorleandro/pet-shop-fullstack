@@ -97,7 +97,7 @@ export const PetCard: React.FC<TypePetProps> = ({
             <FaRegCalendarAlt style={{ fontSize: "13px" }} /> Idade:{" "}
             {ageInYears}
           </S.BirthDay>
-          <S.EditButton onClick={toggleModalPet}>
+          <S.EditButton onClick={toggleModalEditPet}>
             <RiEditBoxLine style={{ fontSize: "18px" }} />
             Editar
           </S.EditButton>
@@ -109,9 +109,11 @@ export const PetCard: React.FC<TypePetProps> = ({
             modalPet={modalPet}
             modalEditPet={modalEditPet}
             toggleModalPet={toggleModalPet}
+            toggleModalEditPet={toggleModalEditPet}
             pets={pets}
             setPets={setPets}
             getPets={getPets}
+            currentPet={modalEditPet ? pet : null}
           />
         </S.SecondCard>
       </S.Card>

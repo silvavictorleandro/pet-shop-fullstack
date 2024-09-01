@@ -1,6 +1,6 @@
 import { MdClose } from "react-icons/md";
 import * as S from "./styles";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useEffect, useRef } from "react";
 import { api } from "../../service/api";
 import { Pet } from "../../interfaces/interfaces";
 import { toast } from "react-toastify";
@@ -9,23 +9,38 @@ interface AddPetProps {
   modalPet: boolean;
   modalEditPet?: boolean;
   toggleModalPet: Function;
+  toggleModalEditPet: Function;
   pets: Pet[];
   setPets: any;
   getPets: any;
+  currentPet?: Pet | null;
 }
 
 export const AddPet: React.FC<AddPetProps> = ({
   modalPet,
   modalEditPet,
   toggleModalPet,
+  toggleModalEditPet,
   setPets,
   getPets,
+  currentPet,
 }) => {
   const nameRef = useRef<HTMLInputElement | null>(null);
   const typeRef = useRef<HTMLInputElement | null>(null);
   const breedRef = useRef<HTMLInputElement | null>(null);
   const ageRef = useRef<HTMLInputElement | null>(null);
   const tutorNameRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (modalEditPet && currentPet) {
+      if (nameRef.current) nameRef.current.value = currentPet.name;
+      if (typeRef.current) typeRef.current.value = currentPet.type;
+      if (breedRef.current) breedRef.current.value = currentPet.breed;
+      if (ageRef.current) ageRef.current.value = currentPet.dateOfBirth;
+      if (tutorNameRef.current)
+        tutorNameRef.current.value = currentPet.tutorName;
+    }
+  }, [modalEditPet, currentPet]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -59,18 +74,30 @@ export const AddPet: React.FC<AddPetProps> = ({
     ageRef.current.value = "";
     tutorNameRef.current.value = "";
 
-    toggleModalPet();
+    modalPet && toggleModalPet();
+    modalEditPet && toggleModalEditPet();
+
     getPets();
   }
 
   return (
-    <S.Fade modal={modalPet}>
-      <S.Modal modal={modalPet}>
+    <S.Fade modal={modalPet} modalEditPet={modalEditPet}>
+      <S.Modal modal={modalPet} modalEditPet={modalEditPet}>
         <S.ContainerHeader>
-          <S.Title>Adicionar Pet</S.Title>
-          <S.ButtonClose onClick={() => toggleModalPet()}>
-            <MdClose />
-          </S.ButtonClose>
+          {modalEditPet ? (
+            <S.Title>Atualizar Pet</S.Title>
+          ) : (
+            <S.Title>Adicionar Pet</S.Title>
+          )}
+          {modalEditPet ? (
+            <S.ButtonClose onClick={() => toggleModalEditPet()}>
+              <MdClose />
+            </S.ButtonClose>
+          ) : (
+            <S.ButtonClose onClick={() => toggleModalPet()}>
+              <MdClose />
+            </S.ButtonClose>
+          )}
         </S.ContainerHeader>
 
         <S.Form onSubmit={handleSubmit}>
@@ -84,7 +111,11 @@ export const AddPet: React.FC<AddPetProps> = ({
           <S.Input type="date" ref={ageRef}></S.Input>
           <S.Label>Nome Tutor</S.Label>
           <S.Input ref={tutorNameRef}></S.Input>
-          <S.ButtonAddPet>Adicionar Pet</S.ButtonAddPet>
+          {modalEditPet ? (
+            <S.ButtonAddPet>Atualizar Pet</S.ButtonAddPet>
+          ) : (
+            <S.ButtonAddPet>Adicionar Pet</S.ButtonAddPet>
+          )}
         </S.Form>
       </S.Modal>
     </S.Fade>
