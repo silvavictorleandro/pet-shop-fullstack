@@ -70,7 +70,7 @@ export const PetCard: React.FC<TypePetProps> = ({
       <S.Card key={pet.id}>
         <S.FirstCard>
           <S.ContainerEspecificInfos>
-            <S.PetType>{pet.type === "Gato" ? <FaCat /> : <FaDog />}</S.PetType>
+            <S.PetType>{pet.type === "gato" ? <FaCat /> : <FaDog />}</S.PetType>
 
             <S.ContainerInfos>
               <S.PetName>
