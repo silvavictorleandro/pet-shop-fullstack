@@ -61,6 +61,7 @@ export const Form = styled.form`
 
 export const Label = styled.label`
   margin-top: 0.5rem;
+  font-weight: bold;
 `;
 
 export const Input = styled.input`

@@ -27,7 +27,8 @@ export const Form: React.FC<FormProps> = ({
   currentPet,
 }) => {
   const nameRef = useRef<HTMLInputElement | null>(null);
-  const typeRef = useRef<HTMLInputElement | null>(null);
+  const typeGatoRef = useRef<HTMLInputElement | null>(null);
+  const typeCachorroRef = useRef<HTMLInputElement | null>(null);
   const breedRef = useRef<HTMLInputElement | null>(null);
   const ageRef = useRef<HTMLInputElement | null>(null);
   const tutorNameRef = useRef<HTMLInputElement | null>(null);
@@ -35,7 +36,11 @@ export const Form: React.FC<FormProps> = ({
   useEffect(() => {
     if (modalEditPet && currentPet) {
       if (nameRef.current) nameRef.current.value = currentPet.name;
-      if (typeRef.current) typeRef.current.value = currentPet.type;
+      if (currentPet.type === "gato" && typeGatoRef.current) {
+        typeGatoRef.current.checked = true;
+      } else if (currentPet.type === "cachorro" && typeCachorroRef.current) {
+        typeCachorroRef.current.checked = true;
+      }
       if (breedRef.current) breedRef.current.value = currentPet.breed;
       if (ageRef.current) ageRef.current.value = currentPet.dateOfBirth;
       if (tutorNameRef.current)
@@ -46,9 +51,15 @@ export const Form: React.FC<FormProps> = ({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
+    const selectedType = typeGatoRef.current?.checked
+      ? "gato"
+      : typeCachorroRef.current?.checked
+      ? "cachorro"
+      : "";
+
     if (
       !nameRef.current?.value ||
-      !typeRef.current?.value ||
+      !selectedType ||
       !breedRef.current?.value ||
       !ageRef.current?.value ||
       !tutorNameRef.current?.value
@@ -62,7 +73,7 @@ export const Form: React.FC<FormProps> = ({
         const response = await api.patch(`/patch?id=${currentPet.id}`, {
           id: currentPet.id,
           name: nameRef.current?.value,
-          type: typeRef.current?.value.toLowerCase(),
+          type: selectedType,
           breed: breedRef.current?.value,
           dateOfBirth: ageRef.current?.value,
           tutorName: tutorNameRef.current?.value,
@@ -80,7 +91,8 @@ export const Form: React.FC<FormProps> = ({
         toast.success("Pet atualizado com sucesso!");
 
         nameRef.current.value = "";
-        typeRef.current.value = "";
+        if (typeGatoRef.current) typeGatoRef.current.checked = false;
+        if (typeCachorroRef.current) typeCachorroRef.current.checked = false;
         breedRef.current.value = "";
         ageRef.current.value = "";
         tutorNameRef.current.value = "";
@@ -94,7 +106,7 @@ export const Form: React.FC<FormProps> = ({
       try {
         const response = await api.post("/post", {
           name: nameRef.current?.value,
-          type: typeRef.current?.value.toLowerCase(),
+          type: selectedType,
           breed: breedRef.current?.value,
           dateOfBirth: ageRef.current?.value,
           tutorName: tutorNameRef.current?.value,
@@ -105,7 +117,8 @@ export const Form: React.FC<FormProps> = ({
         toast.success("Pet cadastrado com sucesso!");
 
         nameRef.current.value = "";
-        typeRef.current.value = "";
+        if (typeGatoRef.current) typeGatoRef.current.checked = false;
+        if (typeCachorroRef.current) typeCachorroRef.current.checked = false;
         breedRef.current.value = "";
         ageRef.current.value = "";
         tutorNameRef.current.value = "";
@@ -144,7 +157,23 @@ export const Form: React.FC<FormProps> = ({
           <S.Label>Nome Pet</S.Label>
           <S.Input ref={nameRef}></S.Input>
           <S.Label>Espécie do Pet</S.Label>
-          <S.Input ref={typeRef} placeholder="Gato ou Cachorro"></S.Input>
+          {/* <S.Input ref={typeRef} placeholder="Gato ou Cachorro"></S.Input> */}
+          <S.Label htmlFor="cachorro">Cachorro</S.Label>
+          <S.Input
+            ref={typeCachorroRef}
+            type="radio"
+            id="cachorro"
+            name="type"
+            value="cachorro"
+          />
+          <S.Label htmlFor="gato">Gato</S.Label>
+          <S.Input
+            ref={typeGatoRef}
+            type="radio"
+            id="gato"
+            name="type"
+            value="gato"
+          />
           <S.Label>Raça</S.Label>
           <S.Input ref={breedRef}></S.Input>
           <S.Label>Data de Nascimento do Pet</S.Label>
