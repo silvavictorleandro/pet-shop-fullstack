@@ -17,21 +17,21 @@ export const FirstCard = styled.div`
 export const ContainerEspecificInfos = styled.div`
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  gap: 10px;
+`;
+
+export const PetType = styled.span`
+  font-size: 30px;
 `;
 
 export const ContainerInfos = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  width: 120px;
+  width: 160px;
 `;
 
 export const PetName = styled.span``;
-
-export const PetType = styled.span`
-  font-size: 30px;
-`;
 
 export const TutorName = styled.span``;
 
